@@ -6,27 +6,25 @@ import 'package:intl/intl.dart';
 import 'food.dart';
 
 class Resturant extends ChangeNotifier {
-
-
   //list
-  final List<Food> _menu =[
+  final List<Food> _menu = [
     //burgers ko lagii
     Food(
-        name:"Classic Cheeseburger",
-        description:"A juicy beef patty with melted,cheddar,lettuce,tomato,a hint of onion and pickle",
-        imagePath:"lib/images/burgers/cheese_burger.jpg",
+        name: "Classic Cheeseburger",
+        description:
+            "A juicy beef patty with melted, cheddar, lettuce,tomato,a hint of onion and pickle",
+        imagePath: "lib/images/burgers/cheese_burger.jpg",
         price: 0.99,
         category: FoodCategory.burgers,
-        availableAddons:[
-          Addon( name: "Extra cheese", price: 0.99),
-          Addon( name: "Bacon", price: 1.99),
-          Addon( name: "Avocado", price: 2.99),
-        ]
-    ),
+        availableAddons: [
+          Addon(name: "Extra cheese", price: 0.99),
+          Addon(name: "Bacon", price: 1.99),
+          Addon(name: "Avocado", price: 2.99),
+        ]),
     Food(
       name: "Beef Burger",
       description:
-      "A juicy beef patty with melted cheddar, lettuce, tomato, a hint of onion, and pickle",
+          "A juicy beef patty with melted cheddar, lettuce, tomato, a hint of onion, and pickle",
       imagePath: "lib/images/burgers/buff_burger.jpg",
       price: 0.99,
       category: FoodCategory.burgers,
@@ -39,7 +37,7 @@ class Resturant extends ChangeNotifier {
     Food(
       name: "Ham Burger",
       description:
-      "A succulent ham patty with melted cheddar, lettuce, tomato, a hint of onion, and pickle",
+          "A succulent ham patty with melted cheddar, lettuce, tomato, a hint of onion, and pickle",
       imagePath: "lib/images/burgers/ham_burger.jpg",
       price: 1.49,
       category: FoodCategory.burgers,
@@ -52,7 +50,7 @@ class Resturant extends ChangeNotifier {
     Food(
       name: "Pork Burger",
       description:
-      "A flavorful pork patty with melted cheddar, lettuce, tomato, a hint of onion, and pickle",
+          "A flavorful pork patty with melted cheddar, lettuce, tomato, a hint of onion, and pickle",
       imagePath: "lib/images/burgers/pork_burger.jpg",
       price: 1.29,
       category: FoodCategory.burgers,
@@ -65,7 +63,8 @@ class Resturant extends ChangeNotifier {
     // desserts ko lagi
     Food(
       name: "21 Love",
-      description: "A delightful mix of chocolate and vanilla ice cream, topped with whipped cream and cherries",
+      description:
+          "A delightful mix of chocolate and vanilla ice cream, topped with whipped cream and cherries",
       imagePath: "lib/images/desserts/21_love.jpg",
       price: 3.99,
       category: FoodCategory.desserts,
@@ -101,7 +100,8 @@ class Resturant extends ChangeNotifier {
     ),
     Food(
       name: "Strawberry Ice Cream",
-      description: "Refreshing strawberry ice cream served in a crispy waffle cone",
+      description:
+          "Refreshing strawberry ice cream served in a crispy waffle cone",
       imagePath: "lib/images/desserts/strawberry_icecream.jpg",
       price: 2.49,
       category: FoodCategory.desserts,
@@ -138,7 +138,8 @@ class Resturant extends ChangeNotifier {
     ),
     Food(
       name: "Colohne",
-      description: "A unique blend of citrus and herbs, perfect for a refreshing drink",
+      description:
+          "A unique blend of citrus and herbs, perfect for a refreshing drink",
       imagePath: "lib/images/drinks/colohne.jpg",
       price: 5.99,
       category: FoodCategory.drinks,
@@ -211,119 +212,121 @@ class Resturant extends ChangeNotifier {
       ],
     ),
   ];
+
   //GETTERS
 
   List<Food> get menu => _menu;
+
   List<CartItem> get cart => _cart;
+
   String get deliveryAddress => _deliveryAddress;
+
   //OPERATIONS
 
-        // user cart
-  final List<CartItem> _cart =[];
+  // user cart
+  final List<CartItem> _cart = [];
 
   //delivery address(user can update)
   String _deliveryAddress = "Enter your location";
-        //add to cart
-void addToCart(Food food, List<Addon> selectedAddons){
-  //see if there is a cart item arlaeady with the same food and addons
-  CartItem? cartItem = _cart.firstWhereOrNull((item) {
+
+  //add to cart
+  void addToCart(Food food, List<Addon> selectedAddons) {
+    //see if there is a cart item arlaeady with the same food and addons
+    CartItem? cartItem = _cart.firstWhereOrNull((item) {
 // check if there are same food items
-    bool isSameFood = item.food == food;
-  // check if the lisr of selected addons are same
+      bool isSameFood = item.food == food;
+      // check if the lisr of selected addons are same
 
-    bool isSameAddons =
-        ListEquality().equals(item.selectedAddons, selectedAddons);
-    return isSameFood && isSameAddons;
-  });
-  // if the items arleady exists increase the quantity
-  if(cartItem != null){
-    cartItem.quantity++;
+      bool isSameAddons =
+          const ListEquality().equals(item.selectedAddons, selectedAddons);
+      return isSameFood && isSameAddons;
+    });
+    // if the items arleady exists increase the quantity
+    if (cartItem != null) {
+      cartItem.quantity++;
+    }
+    //otherwise , add a new cart item in the cart
+    else {
+      _cart.add(
+        CartItem(
+          food: food,
+          selectedAddons: selectedAddons,
+        ),
+      );
+    }
+    notifyListeners();
   }
-  //otherwise , add a new cart item in the cart
-  else{
-    _cart.add(
-      CartItem(
-        food: food,
-        selectedAddons: selectedAddons,
-      ),
-    );
-  }
-  notifyListeners();
-}
-
 
 //remove the cart
 
-void removeFromCart(CartItem cartItem){
-  int cartIndex = _cart.indexOf(cartItem);
-  if(cartIndex != -1){
-    if(_cart[cartIndex].quantity > 1){
-      _cart[cartIndex].quantity--;
-    }else{
-      _cart.removeAt(cartIndex);
+  void removeFromCart(CartItem cartItem) {
+    int cartIndex = _cart.indexOf(cartItem);
+    if (cartIndex != -1) {
+      if (_cart[cartIndex].quantity > 1) {
+        _cart[cartIndex].quantity--;
+      } else {
+        _cart.removeAt(cartIndex);
+      }
     }
+    notifyListeners();
   }
-  notifyListeners();
-}
 
 //total price of the carts
-double getTotalPrice(){
-  double total =0.0;
+  double getTotalPrice() {
+    double total = 0.0;
 
-  for (CartItem cartItem in _cart){
-    double itemTotal = cartItem.food.price;
-    for (Addon addon in cartItem.selectedAddons){
-      itemTotal += addon.price;
+    for (CartItem cartItem in _cart) {
+      double itemTotal = cartItem.food.price;
+      for (Addon addon in cartItem.selectedAddons) {
+        itemTotal += addon.price;
+      }
+      total += itemTotal * cartItem.quantity;
     }
-    total += itemTotal * cartItem.quantity;
+    return total;
   }
-  return total;
-}
+
 //get the total number of item in the cart
 
-int getTotalItemCount(){
-  int totalItemCount = 0;
-  for(CartItem cartItem in _cart){
-    totalItemCount += cartItem.quantity;
+  int getTotalItemCount() {
+    int totalItemCount = 0;
+    for (CartItem cartItem in _cart) {
+      totalItemCount += cartItem.quantity;
+    }
+    return totalItemCount;
   }
-  return totalItemCount;
-}
 
 //clearing the cart
-void clearCart(){
-  _cart.clear();
-  notifyListeners();
-}
+  void clearCart() {
+    _cart.clear();
+    notifyListeners();
+  }
 
 //update address
 
-  void updateDeliveryAddress(String newAddress){
-  _deliveryAddress = newAddress;
-  notifyListeners();
+  void updateDeliveryAddress(String newAddress) {
+    _deliveryAddress = newAddress;
+    notifyListeners();
   }
 
   //HELPERS
   //generating a receipt
   String displayCartReceipt() {
-  final receipt = StringBuffer();
-  receipt.writeln("Here's your receipt.");
-  receipt.writeln();
+    final receipt = StringBuffer();
+    receipt.writeln("Here's your receipt.");
+    receipt.writeln();
 
-  //formattting the date
+    //formattting the date
     String formattedDate =
-    DateFormat('yyy-MM-dd HH:mm:ss').format(DateTime.now());
+        DateFormat('yyy-MM-dd HH:mm:ss').format(DateTime.now());
     receipt.writeln(formattedDate);
     receipt.writeln();
     receipt.writeln("_______________________________________________");
 
-    for(final cartItem in _cart){
+    for (final cartItem in _cart) {
       receipt.writeln(
-        "${cartItem.quantity} x ${cartItem.food.name} - ${_formatPrice(cartItem.food.price)}"
-      );
-      if(cartItem.selectedAddons.isNotEmpty){
-        receipt.writeln(
-          "Add-ons: ${_formatAddons(cartItem.selectedAddons)}"
-        );
+          "${cartItem.quantity} x ${cartItem.food.name} - ${_formatPrice(cartItem.food.price)}");
+      if (cartItem.selectedAddons.isNotEmpty) {
+        receipt.writeln("Add-ons: ${_formatAddons(cartItem.selectedAddons)}");
       }
       receipt.writeln();
     }
@@ -341,11 +344,10 @@ void clearCart(){
     return "\$${price.toStringAsFixed(2)}";
   }
 
-    //format list of addons into string summary
-    String _formatAddons(List<Addon> addons){
-      return addons
-          .map((addon) => "${addon.name} (${_formatPrice(addon.price)})")
-      .join(",");
-    }
+  //format list of addons into string summary
+  String _formatAddons(List<Addon> addons) {
+    return addons
+        .map((addon) => "${addon.name} (${_formatPrice(addon.price)})")
+        .join(",");
   }
-
+}

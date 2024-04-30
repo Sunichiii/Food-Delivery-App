@@ -8,14 +8,12 @@ class QuantitySelector extends StatelessWidget {
   final VoidCallback onIncrement;
   final VoidCallback onDecrement;
 
-
-  const QuantitySelector({
-    required this.food,
-    required this.quantity,
-    required this.onDecrement,
-    required this.onIncrement,
-
-    super.key});
+  const QuantitySelector(
+      {required this.food,
+      required this.quantity,
+      required this.onDecrement,
+      required this.onIncrement,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,15 +39,15 @@ class QuantitySelector extends StatelessWidget {
           //quantity count
 
           Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: SizedBox(
-                width: 20,
-                child: Center(
-                  child: Text(
-                    quantity.toString(),
-                  ),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: SizedBox(
+              width: 20,
+              child: Center(
+                child: Text(
+                  quantity.toString(),
                 ),
               ),
+            ),
           ),
 
           //increase button

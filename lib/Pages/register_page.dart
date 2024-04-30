@@ -6,9 +6,8 @@ import '../components/my_textfield.dart';
 
 class RegisterPage extends StatefulWidget {
   final void Function()? onTap;
-  const RegisterPage({
-    super.key,
-    required this.onTap});
+
+  const RegisterPage({super.key, required this.onTap});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -16,39 +15,38 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController =TextEditingController();
-  final TextEditingController confirmPasswordController =TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   //register method
-  void register() async{
+  void register() async {
     //get auth service
-    final _authService = AuthService();
-    //check if passsword match
-    if(passwordController.text == confirmPasswordController.text){
+    final authService = AuthService();
+    //check if password match
+    if (passwordController.text == confirmPasswordController.text) {
       //try creating user
-      try{
-        await _authService.signUpWithEmailPassword(emailController.text,
-            passwordController.text);
-      }
-      catch(e){
+      try {
+        await authService.signUpWithEmailPassword(
+            emailController.text, passwordController.text);
+      } catch (e) {
         showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text(e.toString()),
-            ),
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(e.toString()),
+          ),
         );
       }
     }
     //if password dont match
-    else{
+    else {
       showDialog(
         context: context,
-        builder: (context) =>const AlertDialog(
+        builder: (context) => const AlertDialog(
           title: Text("Passwords don't match"),
         ),
       );
     }
-
   }
 
   @override
@@ -64,7 +62,9 @@ class _RegisterPageState extends State<RegisterPage> {
             size: 100,
             color: Theme.of(context).colorScheme.inversePrimary,
           ),
-          const SizedBox(height: 25,),
+          const SizedBox(
+            height: 25,
+          ),
           //message, app Slogan
           Text(
             "Create a new Account",
@@ -78,53 +78,59 @@ class _RegisterPageState extends State<RegisterPage> {
               controller: emailController,
               hintText: "Email",
               obscureText: false),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           //password
           MyTextField(
               controller: passwordController,
               hintText: "Password",
               obscureText: true),
 
-          const SizedBox(height: 15,),
+          const SizedBox(
+            height: 15,
+          ),
           //confirm password
           MyTextField(
               controller: confirmPasswordController,
               hintText: "confirm Password",
               obscureText: true),
 
-          const SizedBox(height: 15,),
-
+          const SizedBox(
+            height: 15,
+          ),
 
           //signup
-          MyButton(
-              onTap: register,
-              text: "Sign Up"),
+          MyButton(onTap: register, text: "Sign Up"),
 
-          const SizedBox(height: 25,),
+          const SizedBox(
+            height: 25,
+          ),
 
           //arleady have an account??
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Arleady have an account? ",
+              Text(
+                "Arleady have an account? ",
                 style: TextStyle(
-                    color: Theme.of(context).colorScheme.inversePrimary
-                ),
+                    color: Theme.of(context).colorScheme.inversePrimary),
               ),
-              const SizedBox(width: 4,),
+              const SizedBox(
+                width: 4,
+              ),
               GestureDetector(
                 onTap: widget.onTap,
-                child: Text("Login now",
+                child: Text(
+                  "Login now",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.inversePrimary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-
             ],
           )
-
         ],
       ),
     );

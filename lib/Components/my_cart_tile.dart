@@ -8,9 +8,7 @@ import '../models/resturant.dart';
 class MyCartTile extends StatelessWidget {
   final CartItem cartItem;
 
-  const MyCartTile({
-    required this.cartItem,
-    super.key});
+  const MyCartTile({required this.cartItem, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +29,11 @@ class MyCartTile extends StatelessWidget {
                   //food image
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
+                    child: Image.asset(
                       cartItem.food.imagePath,
                       height: 100,
                       width: 100,
-                  ),
+                    ),
                   ),
 
                   // name and price
@@ -45,61 +43,64 @@ class MyCartTile extends StatelessWidget {
                       //foood name
                       Text(cartItem.food.name),
                       //food price
-                      Text('\$'+ cartItem.food.price.toString(),
-                      style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                      Text(
+                        '\$${cartItem.food.price}',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary),
                       ),
                     ],
                   ),
-                     const Spacer(),
+                  const Spacer(),
                   // increment or decrement quantity
                   QuantitySelector(
-                      quantity : cartItem.quantity,
-                      food: cartItem.food,
-                      onDecrement: (){
-                        resturant.removeFromCart(cartItem);
-                      },
-                      onIncrement: () {
-                        resturant.addToCart(
-                            cartItem.food, cartItem.selectedAddons);
-                      },
+                    quantity: cartItem.quantity,
+                    food: cartItem.food,
+                    onDecrement: () {
+                      resturant.removeFromCart(cartItem);
+                    },
+                    onIncrement: () {
+                      resturant.addToCart(
+                          cartItem.food, cartItem.selectedAddons);
+                    },
                   ),
                 ],
               ),
             ),
-            
+
             //addons
             SizedBox(
-              height: cartItem.selectedAddons.isEmpty? 0: 60,
+              height: cartItem.selectedAddons.isEmpty ? 0 : 60,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.only(left: 10, bottom: 10, right: 10),
-                children: cartItem.selectedAddons.map(
-                        (addon) => Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: FilterChip(
-                              label: Row(
-                                children: [
-                                  //addons name
-                                  Text(addon.name),
-                                  //addon price
-                                  Text(' (\$${addon.price})'),
-                                ],
-                              ),
-                              shape: StadiumBorder(
-                                side: BorderSide(
-                                  color: Theme.of(context).colorScheme.primary
-                                )
-                              ),
-                              onSelected: (value) {},
-                            backgroundColor:
-                            Theme.of(context).colorScheme.secondary,
-                            labelStyle: TextStyle(
+                padding: const EdgeInsets.only(left: 10, bottom: 10, right: 10),
+                children: cartItem.selectedAddons
+                    .map(
+                      (addon) => Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: FilterChip(
+                          label: Row(
+                            children: [
+                              //addons name
+                              Text(addon.name),
+                              //addon price
+                              Text(' (\$${addon.price})'),
+                            ],
+                          ),
+                          shape: StadiumBorder(
+                              side: BorderSide(
+                                  color:
+                                      Theme.of(context).colorScheme.primary)),
+                          onSelected: (value) {},
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary,
+                          labelStyle: TextStyle(
                             color: Theme.of(context).colorScheme.inversePrimary,
-                              fontSize: 12,
-                            ),
+                            fontSize: 12,
                           ),
                         ),
-                ).toList(),
+                      ),
+                    )
+                    .toList(),
               ),
             )
           ],

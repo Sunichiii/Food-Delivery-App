@@ -19,10 +19,10 @@ class MyDrawer extends StatelessWidget {
         children: [
           //app logo
           Padding(
-            padding: const EdgeInsets.only(top:100.0),
+            padding: const EdgeInsets.only(top: 100.0),
             child: Icon(
               Icons.food_bank_rounded,
-              size: 80,
+              size: 150,
               color: Theme.of(context).colorScheme.inversePrimary,
             ),
           ),
@@ -44,17 +44,19 @@ class MyDrawer extends StatelessWidget {
               icon: Icons.settings,
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context)=> const SettingsPage(),
-                ),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsPage(),
+                  ),
                 );
               }),
           const Spacer(),
           //logout list tile
           MyDrawerTile(
-              text: "L O G O U T",
-              icon: Icons.logout,
-              onTap: logout,
+            text: "L O G O U T",
+            icon: Icons.logout,
+            onTap: logout,
           ),
         ],
       ),

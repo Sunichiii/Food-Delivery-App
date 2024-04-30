@@ -5,7 +5,7 @@ import 'package:food_delivery/Components/my_button.dart';
 import 'delivery_progress_page.dart';
 
 class PaymentPage extends StatefulWidget {
-  const PaymentPage({Key? key}) : super(key: key);
+  const PaymentPage({super.key});
 
   @override
   State<PaymentPage> createState() => _PaymentPageState();
@@ -25,40 +25,37 @@ class _PaymentPageState extends State<PaymentPage> {
       //only show dialog box if form is valid
       showDialog(
         context: context,
-        builder: (context) =>
-            AlertDialog(
-              title: const Text("Confirm Payment"),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: [
-                    Text("Card Number: $cardNumber"),
-                    Text("Expiry Date: $expiryDate"),
-                    Text("Card Holder Name: $cardHolderName"),
-                    Text("CVV: $cvvCode"),
-                  ],
-                ),
-              ),
-              actions: [
-                //cancel button
-                TextButton(
-                    onPressed: ()=> Navigator.pop(context),
-                    child: const Text("Cancel"),
-                ),
-                //yes button
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DeliveryProgressPage()
-                          ),
-                        );
-                    }, 
-                    child: Text("Yes")
-                )
+        builder: (context) => AlertDialog(
+          title: const Text("Confirm Payment"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                Text("Card Number: $cardNumber"),
+                Text("Expiry Date: $expiryDate"),
+                Text("Card Holder Name: $cardHolderName"),
+                Text("CVV: $cvvCode"),
               ],
             ),
+          ),
+          actions: [
+            //cancel button
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text("Cancel"),
+            ),
+            //yes button
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const DeliveryProgressPage()),
+                  );
+                },
+                child: const Text("Yes"))
+          ],
+        ),
       );
     }
   }
@@ -66,16 +63,10 @@ class _PaymentPageState extends State<PaymentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme
-          .of(context)
-          .colorScheme
-          .background,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        foregroundColor: Theme
-            .of(context)
-            .colorScheme
-            .inversePrimary,
+        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Checkout"),
       ),
       body: Column(
@@ -108,8 +99,7 @@ class _PaymentPageState extends State<PaymentPage> {
               },
               formKey: formKey),
           const Spacer(),
-          MyButton(onTap: userTappedPay,
-              text: "Pay now"),
+          MyButton(onTap: userTappedPay, text: "Pay now"),
 
           const SizedBox(height: 25)
         ],

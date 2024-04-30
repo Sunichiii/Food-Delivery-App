@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 
 class MyDescriptionBox extends StatelessWidget {
-  const MyDescriptionBox({Key? key}) : super(key: key);
+  const MyDescriptionBox({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     //textstyle
 
     var myPrimaryTextStyle =
-    TextStyle(color: Theme.of(context).colorScheme.inversePrimary);
+        TextStyle(color: Theme.of(context).colorScheme.primary);
     var mySecondaryTextStyle =
-    TextStyle(color: Theme.of(context).colorScheme.primary);
+        TextStyle(color: Theme.of(context).colorScheme.primary);
 
-
-    return Padding( // Wrap Container with Padding widget
-      padding: EdgeInsets.only(left: 25, right: 25, bottom: 25), // Corrected margin
+    return Padding(
+      // Wrap Container with Padding widget
+      padding: const EdgeInsets.only(left: 25, right: 25, bottom: 25),
+      // Corrected margin
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: Theme.of(context).colorScheme.secondary,
+          border: Border.all(
+            color: Theme.of(context).colorScheme.secondary,
           ),
           borderRadius: BorderRadius.circular(8),
         ),
@@ -30,17 +31,28 @@ class MyDescriptionBox extends StatelessWidget {
               //delivery fee
               Column(
                 children: [
-                  Text('\$0.99',style: myPrimaryTextStyle,),
-                  Text('Delivery Fee',style: mySecondaryTextStyle,),
+                  Text(
+                    '\$0.99',
+                    style: myPrimaryTextStyle,
+                  ),
+                  Text(
+                    'Delivery Fee',
+                    style: mySecondaryTextStyle,
+                  ),
                 ],
               ),
               Column(
                 children: [
-                  Text('15-30 min',style: myPrimaryTextStyle,),
-                  Text('Delivery Time',style: mySecondaryTextStyle,),
+                  Text(
+                    '15-30 min',
+                    style: myPrimaryTextStyle,
+                  ),
+                  Text(
+                    'Delivery Time',
+                    style: mySecondaryTextStyle,
+                  ),
                 ],
               ),
-
             ],
           ),
         ),

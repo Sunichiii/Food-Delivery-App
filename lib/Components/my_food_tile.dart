@@ -23,31 +23,40 @@ class FoodTile extends StatelessWidget {
               children: [
                 //food details
                 Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(food.name),
-                        Text('\$' +food.price.toString(),
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        ),
-                        const SizedBox(height: 10,),
-                        
-                        Text(food.description,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(food.name),
+                      Text(
+                        '\$${food.price}',
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.inversePrimary,
                         ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        food.description,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.inversePrimary,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(width: 15,),
+                const SizedBox(
+                  width: 15,
+                ),
                 //food image
 
                 ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.asset(food.imagePath,height: 120,width: 120,),
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    food.imagePath,
+                    height: 120,
+                    width: 120,
+                  ),
                 ),
               ],
             ),
@@ -57,8 +66,9 @@ class FoodTile extends StatelessWidget {
         //divider line
         const Divider(
           color: Colors.white,
-        endIndent: 25,
-        indent: 25,)
+          endIndent: 25,
+          indent: 25,
+        )
       ],
     );
   }

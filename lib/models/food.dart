@@ -1,4 +1,4 @@
-class Food{
+class Food {
   final String name;
   final String description;
   final String imagePath;
@@ -13,12 +13,12 @@ class Food{
     required this.price,
     required this.availableAddons,
     required this.category,
-});
+  });
 }
 
 //food categories
 
-enum FoodCategory{
+enum FoodCategory {
   burgers,
   sides,
   desserts,
@@ -26,12 +26,12 @@ enum FoodCategory{
 }
 
 //food addons
-class Addon{
+class Addon {
   String name;
   double price;
 
   Addon({
     required this.name,
     required this.price,
-});
+  });
 }

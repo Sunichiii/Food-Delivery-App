@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:food_delivery/Components/my_receipt.dart';
 import 'package:food_delivery/models/resturant.dart';
@@ -16,19 +15,18 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
   //getting access ot database
 
   FirestoreService db = FirestoreService();
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
     // if we get to this page submit order to firestore db
     String receipt = context.read<Resturant>().displayCartReceipt();
     db.saveOrderToDatabase(receipt);
   }
 
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         backgroundColor: Colors.transparent,
       ),
       bottomNavigationBar: _buildBottomNavBar(context),
@@ -40,6 +38,7 @@ class _DeliveryProgressPageState extends State<DeliveryProgressPage> {
     );
   }
 }
+
 Widget _buildBottomNavBar(BuildContext context) {
   return Container(
     height: 100,
@@ -76,10 +75,12 @@ Widget _buildBottomNavBar(BuildContext context) {
                 color: Theme.of(context).colorScheme.inversePrimary,
               ),
             ),
-            Text("Delivery Guy",
-            style: TextStyle(
-              color: Colors.grey,
-            ),)
+            Text(
+              "Delivery Guy",
+              style: TextStyle(
+                color: Colors.grey,
+              ),
+            )
           ],
         ),
 
@@ -98,7 +99,9 @@ Widget _buildBottomNavBar(BuildContext context) {
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),
-            const SizedBox(width: 10,),
+            const SizedBox(
+              width: 10,
+            ),
             //CALL BUTTON
             Container(
               decoration: BoxDecoration(
@@ -111,7 +114,6 @@ Widget _buildBottomNavBar(BuildContext context) {
                 color: Colors.green,
               ),
             ),
-
           ],
         )
       ],
